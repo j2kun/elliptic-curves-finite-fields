@@ -1,5 +1,4 @@
 
-
 class EllipticCurve(object):
    def __init__(self, a, b):
       # assume we're already in the Weierstrass form
@@ -115,26 +114,16 @@ class Point(object):
       return [self.x, self.y]
 
    def __eq__(self, other):
-      if isinstance(other, Ideal):
+      if type(other) is Ideal:
          return False
-      return list(self) == list(other)
+
+      return self.x, self.y == other.x, other.y
 
    def __ne__(self, other):
       return not self == other
 
    def __getitem__(self, index):
       return [self.x, self.y][index]
-
-   # lexicographic ordering on points
-   def __lt__(self, other):
-      if isinstance(other, Ideal): return False
-      return list(self) < list(other)
-   def __gt__(self, other):
-      return other.__lt__(self)
-   def __ge__(self, other):
-      return not self < other
-   def __le__(self, other):
-      return not other < self
 
 
 class Ideal(Point):
@@ -144,7 +133,7 @@ class Ideal(Point):
    def __neg__(self):
       return self
 
-   def __repr__(self):
+   def __str__(self):
       return "Ideal"
 
    def __add__(self, Q):
@@ -159,9 +148,5 @@ class Ideal(Point):
          return self
 
    def __eq__(self, other):
-      return isinstance(other, Ideal)
-
-   def __lt__(self, other):
-      return not isinstance(other, Ideal)
-
+      return type(other) is Ideal
 
