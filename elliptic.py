@@ -117,7 +117,7 @@ class Point(object):
       if type(other) is Ideal:
          return False
 
-      return self.x, self.y == other.x, other.y
+      return (self.x, self.y) == (other.x, other.y)
 
    def __ne__(self, other):
       return not self == other
