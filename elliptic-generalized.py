@@ -71,7 +71,7 @@ class Point(object):
 
 
    def __mul__(self, n):
-      if not isinstance(n, int):
+      if not (isinstance(n, int) or isinstance(n, long)):
          raise Exception("Can't scale a point by something which isn't an int!")
       else:
          if n < 0:
